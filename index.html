@@ -1,23 +1,92 @@
 <html>
-  <head>
-    <title>Angular QuickStart</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
-    <!-- 1. Load libraries -->
-     <!-- Polyfill for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <!-- 2. Configure SystemJS -->
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
-  </head>
-  <!-- 3. Display the application -->
-  <body>
+
+<head>
+  <title>Ethereum key generation tool</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="styles.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+  <!-- 1. Load libraries -->
+  <!-- Polyfill for older browsers -->
+  <script src="node_modules/core-js/client/shim.min.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <!-- 2. Configure SystemJS -->
+  <script src="systemjs.config.js"></script>
+  <script>
+    System.import('app').catch(function(err) {
+      console.error(err);
+    });
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            Menu <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="#">Ethereum Wallet</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <header class="intro-header" style="background-image: url('https://github.com/BlackrockDigital/startbootstrap-clean-blog/raw/master/img/home-bg.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="site-heading">
+            <h2>Ethereum Keygen</h2>
+            <hr class="small">
+            <span class="subheading">Open source ethereum key generation tool</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
     <my-app>Loading...</my-app>
-  </body>
+  </div>
+  <script>
+  // Navigation Scripts to Show Header on Scroll-Up
+  jQuery(document).ready(function($) {
+      var MQL = 1170;
+      //primary navigation slide-in effect
+      if ($(window).width() > MQL) {
+          var headerHeight = $('.navbar-custom').height();
+          $(window).on('scroll', {previousTop: 0} ,
+              function() {
+                  var currentTop = $(window).scrollTop();
+                  //check if user is scrolling up
+                  if (currentTop < this.previousTop) {
+                      //if scrolling up...
+                      if (currentTop > 0 && $('.navbar-custom').hasClass('is-fixed')) {
+                          $('.navbar-custom').addClass('is-visible');
+                      } else {
+                          $('.navbar-custom').removeClass('is-visible is-fixed');
+                      }
+                  } else if (currentTop > this.previousTop) {
+                      //if scrolling down...
+                      $('.navbar-custom').removeClass('is-visible');
+                      if (currentTop > headerHeight && !$('.navbar-custom').hasClass('is-fixed')) $('.navbar-custom').addClass('is-fixed');
+                  }
+                  this.previousTop = currentTop;
+              });
+      }
+  });
+  </script>
+</body>
+
 </html>
