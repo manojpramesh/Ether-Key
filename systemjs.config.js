@@ -4,7 +4,7 @@
  */
 (function (global) {
   System.config({
-    baseURL:'/Ether-Key/',
+    baseURL:'',
     paths: {
       // paths serve as alias
       'npm:': 'node_modules/'

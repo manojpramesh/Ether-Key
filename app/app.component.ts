@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var keythereum;
 var options = {
@@ -15,26 +16,19 @@ var kdf = "pbkdf2";
 
 @Component({
     selector: 'my-app',
-    template: `
-        <span class="col-md-3">Enter a password</span>
-        <div class="col-md-6"><input type="password" [(ngModel)]="password"></div>
-        <button class="btn btn-success col-md-3" (click)="generateKey()">Generate</button>
-        <div class="row">
-            <div><label>Private key : </label> {{privateKey}} </div>
-            <div><label>Address : </label> {{address}} </div>
-        </div>
-        <a href="{{keyFile}}" download="{{fileName}}">Get key file</a>
-        `,
+    templateUrl: './app/html/addressGenerator.html',
     styles: [``]
 })
 
 export class AppComponent {
+    constructor(private sanitizer: DomSanitizer) { }
     password: string = '';
     privateKey: string = '';
     address: string = '';
     keyObject: any;
-    keyFile: string = '';
+    keyFile: any;
     fileName: string = '';
+    isGenerated: boolean = false;
     generateKey(password) {
         var dk = keythereum.create(params);
         for (var i = 0; i < dk.privateKey.length; i++) {
@@ -42,18 +36,8 @@ export class AppComponent {
         }
         this.keyObject = keythereum.dump(this.password, dk.privateKey, dk.salt, dk.iv, options);
         this.address = '0x' + this.keyObject.address;
-        this.keyFile = "data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject));
-        this.fileName = "UTC--" + (new Date).toISOString() + "--" + this.keyObject.address;;
+        this.keyFile = this.sanitizer.bypassSecurityTrustUrl("data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject)));
+        this.fileName = "UTC--" + (new Date).toISOString() + "--" + this.keyObject.address;
+        this.isGenerated = true;
     };
-
-    downloadKeyFile() {
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject));
-        var dlAnchorElem = document.getElementById('downloadAnchorElem');
-        dlAnchorElem.setAttribute("href", dataStr);
-        dlAnchorElem.setAttribute("download", "scene.json");
-        dlAnchorElem.click();
-    }
-}
-function uinthex(ua) {
-
 }

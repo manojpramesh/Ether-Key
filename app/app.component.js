@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var platform_browser_1 = require('@angular/platform-browser');
 var options = {
     kdf: "pbkdf2",
     cipher: "aes-128-ctr",
@@ -21,12 +22,13 @@ var options = {
 var params = { keyBytes: 32, ivBytes: 16 };
 var kdf = "pbkdf2";
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(sanitizer) {
+        this.sanitizer = sanitizer;
         this.password = '';
         this.privateKey = '';
         this.address = '';
-        this.keyFile = '';
         this.fileName = '';
+        this.isGenerated = false;
     }
     AppComponent.prototype.generateKey = function (password) {
         var dk = keythereum.create(params);
@@ -35,29 +37,20 @@ var AppComponent = (function () {
         }
         this.keyObject = keythereum.dump(this.password, dk.privateKey, dk.salt, dk.iv, options);
         this.address = '0x' + this.keyObject.address;
-        this.keyFile = "data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject));
+        this.keyFile = this.sanitizer.bypassSecurityTrustUrl("data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject)));
         this.fileName = "UTC--" + (new Date).toISOString() + "--" + this.keyObject.address;
-        ;
+        this.isGenerated = true;
     };
     ;
-    AppComponent.prototype.downloadKeyFile = function () {
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject));
-        var dlAnchorElem = document.getElementById('downloadAnchorElem');
-        dlAnchorElem.setAttribute("href", dataStr);
-        dlAnchorElem.setAttribute("download", "scene.json");
-        dlAnchorElem.click();
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n        <span class=\"col-md-3\">Enter a password</span>\n        <div class=\"col-md-6\"><input type=\"password\" [(ngModel)]=\"password\"></div>\n        <button class=\"btn btn-success col-md-3\" (click)=\"generateKey()\">Generate</button>\n        <div class=\"row\">\n            <div><label>Private key : </label> {{privateKey}} </div>\n            <div><label>Address : </label> {{address}} </div>\n        </div>\n        <a href=\"{{keyFile}}\" download=\"{{fileName}}\">Get key file</a>\n        ",
+            templateUrl: './app/html/addressGenerator.html',
             styles: [""]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-function uinthex(ua) {
-}
 //# sourceMappingURL=app.component.js.map
