@@ -23,5 +23,9 @@
     <a [href]="keyFile" download="{{fileName}}" class="btn btn-success">
     Get key file 
     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-</a>
+    </a>
+    <div>
+        <span>QR code</span>
+        <qr-code [data]="'All QR Code data goes here!'" [size]="150"></qr-code>
+    </div>
 </div>

@@ -16,8 +16,7 @@ var kdf = "pbkdf2";
 
 @Component({
     selector: 'my-app',
-    templateUrl: './app/html/addressGenerator.html',
-    styles: [``]
+    templateUrl: './app/html/addressGenerator.html'
 })
 
 export class AppComponent {

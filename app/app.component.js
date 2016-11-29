@@ -45,8 +45,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: './app/html/addressGenerator.html',
-            styles: [""]
+            templateUrl: './app/html/addressGenerator.html'
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], AppComponent);

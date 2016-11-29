@@ -4,10 +4,11 @@
  */
 (function (global) {
   System.config({
-    baseURL:'',
+    baseURL:'.',
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': 'node_modules/',
+      'angular2-qrcode': 'node_modules/angular2-qrcode/angular2-qrcode.js'
     },
     // map tells the System loader where to look for things
     map: {
