@@ -13,6 +13,6 @@ import { QRCodeModule } from 'angular2-qrcode';
   declarations: [
     AppComponent
   ],
-  bootstrap: [ AppComponent ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
