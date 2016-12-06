@@ -1,14 +1,22 @@
 <div class="row">
-    <span class="col-md-12">Enter a password (atleast 9 charecters)</span>
+    <span class="col-md-12 mb-10">Enter a password (atleast 8 charecters)</span>
     <div class="col-md-6">
         <input type="password" [(ngModel)]="password" class="col-md-12">
     </div>
-    <div class="col-md-3">
-        <button class="btn btn-success col-md-12" (click)="generateKey()">Generate</button>
+    <div class="col-md-6">
+        <button class="btn btn-success col-md-12" (click)="generateKey()">Generate
+            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+        </button>
     </div>
 </div>
+<div *ngIf="isGenerating" class="row loading">
+    <i class="fa fa-circle-o-notch fa-spin fa-2x mb-10" aria-hidden="true"></i>
+    <div>Generating..</div>
+</div>
 <div *ngIf="isGenerated" class="row">
-    <div>You ethereum keyfile has been successfully generated! Access it from below</div>
+    <hr class="small">
+    <div class="col-md-12 text-green">You ethereum keyfile has been successfully generated! Access it from below</div>
+    <hr class="text-black">
     <div class="col-md-6">
         <label>Private key : </label>
         <div class="well">
@@ -21,6 +29,7 @@
             {{address}}
         </div>
     </div>
+    <hr class="small">
     <a [href]="keyFile" download="{{fileName}}" class="btn btn-success col-md-6">
     Get key file 
     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
@@ -32,13 +41,13 @@
         <div class="col-md-3">
             <span>Address</span>
             <div class="well">
-                <qr-code [data]="address" [size]="150"></qr-code>
+                <qr-code [data]="address" [size]="256"></qr-code>
             </div>
         </div>
         <div class="col-md-3">
             <span>Private key</span>
             <div class="well">
-                <qr-code [data]="privateKey" [size]="150"></qr-code>
+                <qr-code [data]="privateKey" [size]="256"></qr-code>
             </div>
         </div>
     </div>

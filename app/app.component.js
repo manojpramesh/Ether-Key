@@ -29,23 +29,30 @@ var AppComponent = (function () {
         this.address = '';
         this.fileName = '';
         this.isGenerated = false;
+        this.isGenerating = false;
     }
     AppComponent.prototype.generateKey = function (password) {
-        var dk = keythereum.create(params);
-        for (var i = 0; i < dk.privateKey.length; i++) {
-            this.privateKey += dk.privateKey[i].toString(16);
-        }
-        this.keyObject = keythereum.dump(this.password, dk.privateKey, dk.salt, dk.iv, options);
-        this.address = '0x' + this.keyObject.address;
-        this.keyFile = this.sanitizer.bypassSecurityTrustUrl("data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject)));
-        this.fileName = "UTC--" + (new Date).toISOString() + "--" + this.keyObject.address;
-        this.isGenerated = true;
+        var _this = this;
+        this.isGenerating = true;
+        setTimeout(function () {
+            var dk = keythereum.create(params);
+            for (var i = 0; i < dk.privateKey.length; i++) {
+                _this.privateKey += dk.privateKey[i].toString(16);
+            }
+            _this.keyObject = keythereum.dump(_this.password, dk.privateKey, dk.salt, dk.iv, options);
+            _this.address = '0x' + _this.keyObject.address;
+            _this.keyFile = _this.sanitizer.bypassSecurityTrustUrl("data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(_this.keyObject)));
+            _this.fileName = "UTC--" + (new Date).toISOString() + "--" + _this.keyObject.address;
+            _this.isGenerated = true;
+            _this.isGenerating = false;
+        }, 10);
     };
     ;
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: './app/html/addressGenerator.html'
+            templateUrl: './app/html/addressGenerator.html',
+            styles: ["\n        .mb-10 {\n            margin-bottom: 10px;\n        }\n        .text-green {\n            color: green;\n        }\n        .loading {\n            text-align: center;\n            padding: 10%;\n        },\n        .text-black {\n            color: black;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], AppComponent);

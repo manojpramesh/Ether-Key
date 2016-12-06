@@ -16,7 +16,22 @@ var kdf = "pbkdf2";
 
 @Component({
     selector: 'my-app',
-    templateUrl: './app/html/addressGenerator.html'
+    templateUrl: './app/html/addressGenerator.html',
+    styles: [`
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+        .text-green {
+            color: green;
+        }
+        .loading {
+            text-align: center;
+            padding: 10%;
+        },
+        .text-black {
+            color: black;
+        }
+    `]
 })
 
 export class AppComponent {
@@ -28,15 +43,20 @@ export class AppComponent {
     keyFile: any;
     fileName: string = '';
     isGenerated: boolean = false;
+    isGenerating: boolean = false;
     generateKey(password) {
-        var dk = keythereum.create(params);
-        for (var i = 0; i < dk.privateKey.length; i++) {
-            this.privateKey += dk.privateKey[i].toString(16);
-        }
-        this.keyObject = keythereum.dump(this.password, dk.privateKey, dk.salt, dk.iv, options);
-        this.address = '0x' + this.keyObject.address;
-        this.keyFile = this.sanitizer.bypassSecurityTrustUrl("data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject)));
-        this.fileName = "UTC--" + (new Date).toISOString() + "--" + this.keyObject.address;
-        this.isGenerated = true;
+        this.isGenerating = true;
+        setTimeout(() => {
+            var dk = keythereum.create(params);
+            for (var i = 0; i < dk.privateKey.length; i++) {
+                this.privateKey += dk.privateKey[i].toString(16);
+            }
+            this.keyObject = keythereum.dump(this.password, dk.privateKey, dk.salt, dk.iv, options);
+            this.address = '0x' + this.keyObject.address;
+            this.keyFile = this.sanitizer.bypassSecurityTrustUrl("data:text;charset=utf-8," + encodeURIComponent(JSON.stringify(this.keyObject)));
+            this.fileName = "UTC--" + (new Date).toISOString() + "--" + this.keyObject.address;
+            this.isGenerated = true;
+            this.isGenerating = false;
+        }, 10);
     };
 }
