@@ -1,31 +1,45 @@
-<span class="col-md-3">Enter a password</span>
-<div class="col-md-6">
-    <input type="password" [(ngModel)]="password" class="col-md-12">
+<div class="row">
+    <span class="col-md-12">Enter a password (atleast 9 charecters)</span>
+    <div class="col-md-6">
+        <input type="password" [(ngModel)]="password" class="col-md-12">
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-success col-md-12" (click)="generateKey()">Generate</button>
+    </div>
 </div>
-<div class="col-md-3">
-    <button class="btn btn-success col-md-12" (click)="generateKey()">Generate</button>
-</div>
-<div *ngIf="isGenerated">
-    <div class="row">
-        <div class="col-md-6">
-            <label>Private key : </label>
-            <div class="well">
-                {{privateKey}}
-            </div>
-        </div>
-        <div class="col-md-6">
-            <label>Address : </label>
-            <div class="well">
-                {{address}}
-            </div>
+<div *ngIf="isGenerated" class="row">
+    <div>You ethereum keyfile has been successfully generated! Access it from below</div>
+    <div class="col-md-6">
+        <label>Private key : </label>
+        <div class="well">
+            {{privateKey}}
         </div>
     </div>
-    <a [href]="keyFile" download="{{fileName}}" class="btn btn-success">
+    <div class="col-md-6">
+        <label>Address : </label>
+        <div class="well">
+            {{address}}
+        </div>
+    </div>
+    <a [href]="keyFile" download="{{fileName}}" class="btn btn-success col-md-6">
     Get key file 
     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
     </a>
-    <div>
-        <span>QR code</span>
-        <qr-code [data]="{{address}}" [size]="150"></qr-code>
+    <div class="col-md-12">
+        QR code
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <span>Address</span>
+            <div class="well">
+                <qr-code [data]="address" [size]="150"></qr-code>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span>Private key</span>
+            <div class="well">
+                <qr-code [data]="privateKey" [size]="150"></qr-code>
+            </div>
+        </div>
     </div>
 </div>
