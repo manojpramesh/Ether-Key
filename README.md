@@ -26,4 +26,4 @@ npm start
 ```
 
 
-![Ether-Key](/screenshot.jpg?raw=true "Final output")
+![Ether-Key](https://raw.githubusercontent.com/manojpramesh/Ether-Key/master/screenshot.JPG "Final output")
