@@ -9,45 +9,55 @@
         </button>
     </div>
 </div>
-<div *ngIf="isGenerating" class="row loading">
+<div *ngIf="isGenerating" class="row loading mb-10">
     <i class="fa fa-circle-o-notch fa-spin fa-2x mb-10" aria-hidden="true"></i>
     <div>Generating..</div>
 </div>
 <div *ngIf="isGenerated" class="row">
-    <hr class="small">
-    <div class="col-md-12 text-green">You ethereum keyfile has been successfully generated! Access it from below</div>
-    <hr class="text-black">
-    <div class="col-md-6">
-        <label>Private key : </label>
-        <div class="well">
-            {{privateKey}}
-        </div>
+    <br>
+    <div class="col-md-12 text-green mb-20">Your ethereum keyfile has been successfully generated! Access it from below</div>
+    <br class="big">
+    <div class="col-md-6 text-black mb-10">
+        <i class="fa fa-hand-o-right" aria-hidden="true"></i> Copy the keyfile to keystore to start using.
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mb-20">
+        <a [href]="keyFile" download="{{fileName}}" class="btn btn-success col-md-12">
+        Get key file 
+        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="col-md-12 text-black mb-10">
+        <i class="fa fa-hand-o-right" aria-hidden="true"></i> Address of the account geneated.
+    </div>
+    <div class="col-md-12 mb-10">
         <label>Address : </label>
         <div class="well">
             {{address}}
         </div>
     </div>
-    <hr class="small">
-    <a [href]="keyFile" download="{{fileName}}" class="btn btn-success col-md-6">
-    Get key file 
-    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-    </a>
-    <div class="col-md-12">
-        QR code
+    <div class="col-md-12 text-black mb-10">
+        <i class="fa fa-hand-o-right" aria-hidden="true"></i> Private key used to create account. DO NOT SHARE WITH ANYONE!!
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 mb-20">
+        <label>Private key : </label>
+        <div class="well">
+            {{privateKey}}
+        </div>
+    </div>
+    <div>
+        <div class="col-md-6 message">
+            <i class="fa fa-hand-o-right" aria-hidden="true"></i> Print the QR code for easy access.
+        </div>
         <div class="col-md-3">
-            <span>Address</span>
+            <label>Address</label>
             <div class="well">
-                <qr-code [data]="address" [size]="256"></qr-code>
+                <qr-code [data]="address" [size]="220"></qr-code>
             </div>
         </div>
         <div class="col-md-3">
-            <span>Private key</span>
+            <label>Private key</label>
             <div class="well">
-                <qr-code [data]="privateKey" [size]="256"></qr-code>
+                <qr-code [data]="privateKey" [size]="220"></qr-code>
             </div>
         </div>
     </div>

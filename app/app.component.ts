@@ -21,15 +21,21 @@ var kdf = "pbkdf2";
         .mb-10 {
             margin-bottom: 10px;
         }
+        .mb-20 {
+            margin-bottom: 20px;
+        }
         .text-green {
             color: green;
         }
         .loading {
             text-align: center;
             padding: 10%;
-        },
+        }
         .text-black {
             color: black;
+        }
+        .message {
+            padding: 130px 15px;
         }
     `]
 })

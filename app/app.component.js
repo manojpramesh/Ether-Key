@@ -52,7 +52,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: './app/html/addressGenerator.html',
-            styles: ["\n        .mb-10 {\n            margin-bottom: 10px;\n        }\n        .text-green {\n            color: green;\n        }\n        .loading {\n            text-align: center;\n            padding: 10%;\n        },\n        .text-black {\n            color: black;\n        }\n    "]
+            styles: ["\n        .mb-10 {\n            margin-bottom: 10px;\n        }\n        .mb-20 {\n            margin-bottom: 20px;\n        }\n        .text-green {\n            color: green;\n        }\n        .loading {\n            text-align: center;\n            padding: 10%;\n        }\n        .text-black {\n            color: black;\n        }\n        .message {\n            padding: 130px 15px;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], AppComponent);
