@@ -11,18 +11,21 @@ Basic useful feature list:
  * Mist compatible file is generated and available to download.
  * QR code for address and private key is available.
 
-Build the project
+#### Build the project
 
+1. Clone repository
 ```
-git clone https://github.com/manojpramesh/Ether-Key.git
-```
-
-```
-npm install
+ git clone https://github.com/manojpramesh/Ether-Key.git
 ```
 
+2. Install dependencies
 ```
-npm start
+ npm install
+```
+
+3. Start the project
+```
+ npm start
 ```
 
 #### Screenshot - EtherKey
